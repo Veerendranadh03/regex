@@ -1,0 +1,29 @@
+import re
+
+pattern = r"^\((?P<x>[-+]?\d+(?:\.\d+)?), (?P<y>[-+]?\d+(?:\.\d+)?)\)$"
+regex = re.compile(pattern)
+
+def sanitize_num_str(string):
+    return re.sub(r'(?:\.0+|\.\d+(0+))$', '', string.strip("+"))
+
+def is_valid(entry):
+    result = regex.match(entry)
+    if result == None or result.group("x") == None or result.group("y") == None: 
+        return False
+    x_str = sanitize_num_str(result.group("x"))
+    y_str = sanitize_num_str(result.group("y"))
+    x = float(x_str)
+    y = float(y_str)
+    if x_str != sanitize_num_str(str(x)) or y_str != sanitize_num_str(str(y)):
+        return False
+    return (x >= -90 and x <= 90) and (y >= -180 and y <= 180)
+
+def main():
+    entries = [input() for _ in range(int(input()))]
+    for entry in entries:
+        if is_valid(entry):
+            print("Valid")
+        else:
+            print("Invalid")
+
+main()
