@@ -1,0 +1,31 @@
+import math
+import os
+import random
+import re
+import sys
+
+
+def regexidecomments():
+ 
+ 
+    ptn = r"((/\*(.*?\n?)+\*/)|(//.*))"
+    paragraph = list()
+ 
+
+    try:
+
+        for i in range(200):
+            line = input()
+            paragraph.append(line.strip())
+    except EOFError:
+        pass
+    strparag = "\n".join(paragraph)
+    m = re.findall(ptn, strparag)
+    for i in m:
+        print(i[0])
+    return 1
+
+
+if __name__ == "__main__":
+
+    result = regexidecomments()
