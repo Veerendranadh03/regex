@@ -1,0 +1,19 @@
+import re
+N=int(input())
+list1=[]
+for i in range(N):
+    n=input()
+    pattern=r'[\w\.]{1,}@[\w\.]{1,}\.[a-zA-Z]{2,3}'
+    match=re.findall(pattern,n)
+    if match:
+        list1.append(match)
+list2=[]
+for i in list1:
+    if len(i)==1:
+          list2.append(*i)
+    else:
+        for j in i:
+            list2.append(j)
+list3=list(set(list2))            
+list3.sort()            
+print(*list3,sep=';')
