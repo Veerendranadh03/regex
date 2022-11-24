@@ -1,0 +1,27 @@
+import math
+import os
+import random
+import re
+import sys
+
+
+def regexdomainname():
+ 
+    ptn = r"(?<=http)s?((://www.)|(://))(((?!www)[a-zA-Z\-]*?)([\w\-]+\.)+[a-zA-Z]+(?!\.))"
+    n = int(input())
+    domains = set()
+    for i in range(n):
+        htm = input()
+        if (re.search(ptn, htm)):
+            m = re.finditer(ptn, htm)
+            for i in m:
+                domains.add(i.group(4))
+
+    result = ";".join(sorted(list(domains)))
+    print(result)
+    return result
+
+
+if __name__ == "__main__":
+
+    result = regexdomainname()
